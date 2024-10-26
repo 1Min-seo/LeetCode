@@ -1,6 +1,10 @@
 class Solution {
     public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
-       int max=Arrays.stream(candies).max().getAsInt();
+        int max=0;
+        for(int m: candies){
+            max=Math.max(m,max);
+        }
+    
         List<Boolean> result=new ArrayList<>();
 
         for(int x:candies){

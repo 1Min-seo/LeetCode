@@ -3,6 +3,7 @@ class Solution {
         int cnt=n;
     
         for(int i=0; i<flowerbed.length; i++){
+            if(cnt==0) return true;
             if(flowerbed[i]==0){
                 boolean emptyLeftPlot= (i==0) || (flowerbed[i-1]==0);
                 boolean emptyRightPlot= (i==flowerbed.length-1) || (flowerbed[i+1]==0);
@@ -13,8 +14,7 @@ class Solution {
                 }
             }
         }
-        if(cnt==0) return true;
-        else return false;
+        return cnt==0;
     }
 }
 

@@ -1,14 +1,14 @@
 class Solution {
     public int largestAltitude(int[] gain) {
-        int []altitudes=new int[gain.length+1];
+        int currentAltitudes=0;
+        int highestAltitudes=currentAltitudes;
 
-        altitudes[0]=0;
-        for(int i=0; i<gain.length; i++){
-            altitudes[i+1]=altitudes[i]+gain[i];
+        for(int altitudeGain: gain){
+            currentAltitudes+=altitudeGain;
+
+            highestAltitudes=Math.max(currentAltitudes, highestAltitudes);
         }
 
-        Arrays.sort(altitudes);
-
-        return altitudes[altitudes.length-1];
+        return highestAltitudes;
     }
 }

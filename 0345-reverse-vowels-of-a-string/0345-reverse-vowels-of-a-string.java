@@ -11,18 +11,21 @@ class Solution {
             while(left<right && vowels.indexOf(ch[left])==-1){
                 left++;
             }
+
             while(left<right && vowels.indexOf(ch[right])==-1){
                 right--;
             }
 
-            if(left<right){
-                char tmp=ch[left];
-                ch[left]=ch[right];
-                ch[right]=tmp;
 
-                left++;
-                right--;
-            }
+            System.out.print(ch[left]+" "+ch[right]);
+            System.out.println();
+
+            char tmp=ch[left];
+            ch[left]=ch[right];
+            ch[right]=tmp;
+
+            left++;
+            right--;
         }
 
         return new String(ch);

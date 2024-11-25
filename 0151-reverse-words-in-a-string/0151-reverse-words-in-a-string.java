@@ -1,14 +1,27 @@
 class Solution {
     public String reverseWords(String s) {
-        String arr[]=s.trim().split("\\s+");
-        List<String> newArr=new ArrayList<>();
+        String []words=s.trim().split("\\s+");
+        StringBuilder sb=new StringBuilder();
 
-        for(String ns: arr){
-            newArr.add(ns);
+        int left=0;
+        int right=words.length-1;
+
+        while(left<right){
+            String tmp="";
+                tmp=words[left];
+                words[left]=words[right];
+                words[right]=tmp;
+
+                left++;
+                right--;
         }
 
-        Collections.reverse(newArr);
+        for(int i=0; i<words.length; i++){
+            sb.append(words[i]);
+            sb.append(" ");
+        }
 
-        return String.join(" ",newArr);
+        sb.deleteCharAt(sb.length()-1);
+        return sb.toString();
     }
 }

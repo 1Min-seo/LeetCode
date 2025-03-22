@@ -8,10 +8,6 @@ class Solution {
         Arrays.sort(sorted);
         Arrays.sort(sortedCopy);
 
-
-        System.out.println(sorted);
-        System.out.println(sortedCopy);
-
         if(s.length()!=t.length()){
             return false;
         }

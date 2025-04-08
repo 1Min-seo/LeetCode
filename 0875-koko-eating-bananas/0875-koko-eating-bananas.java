@@ -3,33 +3,30 @@ class Solution {
         int left = 1;
         int right = getMaxPile(piles);
 
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            long hours = getTotalHours(piles, mid);
+        while(left <= right){
+            int mid = left + (right - left) / 2 ;
+            long total = 0;
+            for(int pile : piles){
+                total += (pile + mid - 1) / mid;
+            }
 
-            if (hours <= h) {
+            if(total <= h){
                 right = mid - 1;
-            } else {
+            }else{
                 left = mid + 1;
             }
         }
-
         return left;
+
     }
 
-    private long getTotalHours(int[] piles, int k) {
-        long total = 0;
-        for (int pile : piles) {
-            total += (pile + k - 1) / k;
-        }
-        return total;
-    }
-
-    private int getMaxPile(int[] piles) {
+    //최댓값 구하기
+    private int getMaxPile(int[] piles){
         int max = 0;
-        for (int pile : piles) {
-            if (pile > max) max = pile;
+        for(int pile : piles){
+            if(max < pile) max = pile;
         }
+
         return max;
     }
 }

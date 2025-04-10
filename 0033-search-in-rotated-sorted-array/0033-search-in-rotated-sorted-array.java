@@ -16,15 +16,24 @@ class Solution {
             }
         }
 
-        for(int i = left; i < nums.length; i++){
-            if(nums[i] == target) result = i;
+        int pivot = left;
+        left = 0;
+        right = nums.length - 1;
+
+        if (target >= nums[pivot] && target <= nums[right]) {
+            left = pivot;
+        } else {
+            right = pivot - 1;
         }
 
-        for(int i = 0; i < left; i++){
-            if(nums[i] == target) result = i;
+        while(left <= right){
+            int mid = (left + right) / 2; 
+            if(nums[mid] == target) return mid;
+            else if(nums[mid] < target) left = mid + 1;
+            else right = mid - 1;
         }
-        
-        return result == -1 ? -1 : result;
-             
+
+        return -1;
     }
+    
 }

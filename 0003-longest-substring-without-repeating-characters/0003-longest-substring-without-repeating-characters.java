@@ -10,9 +10,9 @@ class Solution {
                 left++;
             }
             hs.add(s.charAt(right));
-            result = Math.max(result, right - left);
+            result = Math.max(result, right - left + 1);
         }
 
-        return result + 1;
+        return result;
     }
 }

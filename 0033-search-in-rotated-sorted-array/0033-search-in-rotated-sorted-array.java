@@ -2,6 +2,7 @@ class Solution {
     public int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
+        int result = -1;
 
         while(left <= right ){
             int mid = (left + right) / 2;
@@ -16,9 +17,14 @@ class Solution {
         }
 
         for(int i = left; i < nums.length; i++){
-            if(nums[i] == target) return i;
+            if(nums[i] == target) result = i;
         }
-        return -1;
+
+        for(int i = 0; i < left; i++){
+            if(nums[i] == target) result = i;
+        }
+        
+        return result == -1 ? -1 : result;
              
     }
 }

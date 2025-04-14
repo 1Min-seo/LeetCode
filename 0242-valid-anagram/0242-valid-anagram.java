@@ -1,21 +1,18 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        String copy=t;
+        HashMap<Character, Integer> map = new HashMap<>();
 
-        char []sorted=s.toCharArray();
-        char []sortedCopy=copy.toCharArray();
-
-        Arrays.sort(sorted);
-        Arrays.sort(sortedCopy);
-
-        if(s.length()!=t.length()){
-            return false;
+        for(char c : s.toCharArray()){
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        for(int i=0; i<s.length(); i++){
-            if(sorted[i]!=sortedCopy[i]) return false;
+        for(char c : t.toCharArray()){
+            map.put(c, map.getOrDefault(c, 0) - 1);
         }
 
+        for(int value : map.values()){
+            if(value != 0) return false;
+        }
         return true;
     }
 }

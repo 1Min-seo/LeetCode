@@ -5,22 +5,19 @@ class Solution {
         int result = 0;
 
         while(left < right){
-            int ans = ((right - left ) * Math.min(height[left], height[right]));
-
-            if(left < right && height[left] < height[right]){
+            int container = (right - left) * (Math.min(height[left], height[right]));
+            result = Math.max(result, container);
+            if(height[left] < height[right]){
                 left++;
-            }else if(left < right && height[left] >= height[right]){
+            }else{
                 right--;
             }
-
-            result = Math.max(result, ans);        
         }
 
         return result;
     }
 }
-
 /**
-    left = 0 right = 8
-    
+    정렬X
+    높이를 비교해서 작으면 작은 쪽에서 옮기기
  */

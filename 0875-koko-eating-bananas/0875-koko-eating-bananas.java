@@ -1,37 +1,23 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         int left = 1;
-        int right = maxPile(piles);
+        int right = 0;
+        for(int pile : piles){
+            if(pile > right) right = pile;
+        }
 
-        while (left <= right){
+        while(left <= right){
             int mid = left + (right - left) / 2;
-            long total = totalPile(piles, mid);
-
-            if(total <= h){
+            int result = 0;
+            for(int pile : piles){
+                result += Math.ceil((pile + mid - 1) / mid);
+            }
+            if(result <= h){
                 right = mid - 1;
             }else{
                 left = mid + 1;
             }
         }
         return left;
-    }
-
-    //ceil로 total 구하기
-    private long totalPile(int[] piles, int mid){
-        long total = 0;
-        for(int pile : piles){
-            total += (pile + mid -1) / mid;
-        }
-        return total;
-    }
-
-    //가장 큰 값 구하기
-    private int maxPile(int[] piles){
-        int max = 0;
-        for(int pile : piles){
-            if(max < pile) max = pile;
-        }
-
-        return max;
     }
 }

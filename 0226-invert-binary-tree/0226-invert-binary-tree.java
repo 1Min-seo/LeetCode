@@ -21,8 +21,8 @@ class Solution {
         root.left = root.right;
         root.right = tmp;
 
-        invertTree(root.left);
-        invertTree(root.right);
+        inverTree(root.left);
+        inverTree(root.right);
 
         return root;
     }

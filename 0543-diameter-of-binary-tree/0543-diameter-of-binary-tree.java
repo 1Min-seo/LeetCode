@@ -14,18 +14,20 @@
  * }
  */
 class Solution {
-    int diameter = 0; 
+    int max = Integer.MIN_VALUE;
     public int diameterOfBinaryTree(TreeNode root) {
-        depth(root); //a
-        return diameter; //b
+        dfs(root);
+        return max;
     }
-    private int depth(TreeNode node){
-        if(node == null) return 0; //c
+  
+    public int dfs(TreeNode root){
+        if(root == null) return 0;
 
-        int left = depth(node.left); //d
-        int right = depth(node.right); //e
+        int left = dfs(root.left);
+        int right = dfs(root.right);
 
-        diameter = Math.max(diameter, left + right); //f 왼쪽 +  오른쪽 전체 길이
-        return Math.max(left, right) + 1; //g 최대 깊이
+        max = Math.max(max, left + right);
+
+        return Math.max(left, right) + 1;
     }
 }

@@ -1,38 +1,32 @@
+import java.util.*;
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        int[] result=new int[k];
-        HashMap<Integer, Integer> hm = new HashMap<>();
+        Map<Integer, Integer> freqMap = new HashMap<>();
 
-        Arrays.sort(nums);
-        for(int num : nums){
-            hm.put(num, hm.getOrDefault(num, 0)+1);
+        for(int num : nums) {
+            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
         }
 
-        //keySet()을 이용해 빈도수를 기준으로 정렬하기 위해 set을 List로 변환
-        List<Integer> sortedKeys= new ArrayList<>(hm.keySet());
+        //내림차순 (x, y) => (num, 빈도수)
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[1] - a[1]);
 
-        sortedKeys.sort((a,b) -> hm.get(b)-hm.get(a));
+        for(int key : freqMap.keySet()) {
+            pq.offer(new int[] {key, freqMap.get(key)});
+        }
 
-        for(int i=0; i<k; i++){
-            result[i]=sortedKeys.get(i);
+        int[] result = new int[k];
+        for(int i = 0; i < k; i++) {
+            result[i] = pq.poll()[0];
+            // int [] a ->> {x,y} {3이 4번나왔음}
+
         }
 
         return result;
-
+        
     }
 }
-
 /**
-    먼저 정렬을 해야하지 않을까?
-    1 1 1 2 2 3
-
-    해시를 써야하지 않을까
-    num이 키
-    카운트가 벨류
-    hash
     1   3
     2   2
     3   1
-
-
  */

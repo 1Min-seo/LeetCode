@@ -6,12 +6,13 @@ class Solution {
         int result = 0;
 
         for(int right = 0; right < s.length(); right++) {
-            while(hs.contains(s.charAt(right))) {
+            while(!hs.add(s.charAt(right))) {
                 hs.remove(s.charAt(left));
                 left++;
             }
 
             hs.add(s.charAt(right));
+
             result = Math.max(result, right - left + 1);
         }
 

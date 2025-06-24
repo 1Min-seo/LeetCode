@@ -1,44 +1,39 @@
 class Solution {
-    private final int[] dx = {-1, 0, 0, 1};
-    private final int[] dy = {0, -1, 1, 0};
-    private int row;
-    private int col;
-
+    int rowNum;
+    int colNum;
+    int currentArea;
     public int maxAreaOfIsland(int[][] grid) {
-        int answer = 0;
-        row = grid.length;
-        col = grid[0].length;
+        if(grid == null || grid.length == 0) {
+            return 0;
+        }
 
-        if(grid == null || grid.length == 0) return 0;
+        rowNum = grid.length;
+        colNum = grid[0].length;
+        int maxArea = 0;
 
-        for(int i = 0; i < row; i++) {
-            for(int j = 0; j < col; j++) {
-                if(grid[i][j] == 1){
-                    int area = dfs(grid, i, j);
-                    answer = Math.max(answer, area);
-                }  
+        for(int i = 0; i < rowNum; i++) {
+            for(int j = 0; j < colNum; j++) {
+                if(grid[i][j] == 1) {
+                    currentArea = 0;
+                    dfs(grid, i, j);
+                    maxArea = Math.max(maxArea, currentArea);
+                }
             }
         }
-        return answer;
+        return maxArea;
     }
 
-    private int dfs(int[][] grid, int x, int y) {
-        grid[x][y] = 0;
-        int area = 1;
-
-        for(int i = 0; i < 4; i++){
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-
-            if(nx >= 0 && ny >=0 && nx < row && ny < col && grid[nx][ny] == 1) {
-                area += dfs(grid, nx, ny);
-            }
+    private void dfs(int[][] grid, int row, int col) {
+        if(row < 0 || col < 0 || row >= rowNum || col >= colNum || grid[row][col] == 0) {
+            return;
         }
-        return area;
-    }
 
+        grid[row][col] = 0;
+        currentArea++;
+
+        dfs(grid, row + 1, col);
+        dfs(grid, row - 1, col);
+        dfs(grid, row, col + 1);
+        dfs(grid, row, col - 1);
+    }
 }
-// 1 1 0 0 0
-// 1 1 0 0 0
-// 0 0 0 1 1
-// 0 0 0 1 1

@@ -1,19 +1,17 @@
+import java.util.*;
 class Solution {
     public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
-      int max=-1;
-      for(int i=0; i<candies.length; i++){
-        max=Math.max(max,candies[i]);
-      }
+        List<Boolean> result = new ArrayList<>();
 
-      List<Boolean>result=new ArrayList<>();
-      for(int i=0; i<candies.length; i++){
-        if(candies[i]+extraCandies>=max){
-            result.add(true);
-        }else{
-            result.add(false);
+        int maxCandy = 0;
+        for(int candy : candies) {
+            maxCandy = Math.max(maxCandy, candy);
         }
-      }
 
-      return result;
+        for(int i = 0; i < candies.length; i++) {
+            result.add(candies[i] + extraCandies >= maxCandy);
+        }
+
+        return result;
     }
 }

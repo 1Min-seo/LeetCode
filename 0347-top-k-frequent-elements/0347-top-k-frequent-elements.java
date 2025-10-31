@@ -1,32 +1,23 @@
 import java.util.*;
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> freqMap = new HashMap<>();
-
+        Map<Integer, Integer> hm = new HashMap<>();
         for(int num : nums) {
-            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+            hm.put(num, hm.getOrDefault(num, 0) + 1);
         }
 
-        //내림차순 (x, y) => (num, 빈도수)
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[1] - a[1]);
+        PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>((a, b) -> a.getValue() - b.getValue());
+        for(Map.Entry<Integer, Integer> entry : hm.entrySet()) {
+            pq.offer(entry);
+            if(pq.size() > k) pq.poll();
 
-        for(int key : freqMap.keySet()) {
-            pq.offer(new int[] {key, freqMap.get(key)});
         }
-
+        
         int[] result = new int[k];
-        for(int i = 0; i < k; i++) {
-            result[i] = pq.poll()[0];
-            // int [] a ->> {x,y} {3이 4번나왔음}
-
+        for(int i = k - 1; i >= 0; i--) {
+            result[i] = pq.poll().getKey();
         }
 
         return result;
-        
     }
 }
-/**
-    1   3
-    2   2
-    3   1
- */
